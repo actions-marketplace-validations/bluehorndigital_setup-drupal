@@ -26,13 +26,15 @@ jobs:
           - php-version: "8.0"
             drupal-version: "^9"
           - php-version: "8.1"
-            drupal-version: "^10@alpha"
+            drupal-version: "^10"
+          - php-version: "8.2"
+            drupal-version: "11.x-dev"
     env:
       extensions: zip, gd
       key: cache-v1
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup cache environment
         id: cache-env
         uses: shivammathur/cache-extensions@develop
@@ -42,7 +44,7 @@ jobs:
           key: ${{ env.key }}
 
       - name: Cache extensions
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ${{ steps.cache-env.outputs.dir }}
           key: ${{ steps.cache-env.outputs.key }}
